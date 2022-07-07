@@ -4,11 +4,6 @@ import numpy as np
 img_file = "C:/new_folder/votos.jpg"
 
 
-areas_list = []
-four_points_list = []
-contours_index = []
-
-
 frame = cv.imread(img_file)
 copy = frame.copy()
 
@@ -49,12 +44,7 @@ for c in contours:
             M = cv.getPerspectiveTransform(edge_pts_in_src_img, edge_pts_in_destine_img)
 
             warped = cv.warpPerspective(new_img, M, (width, height))
+            warped = cv.rotate(warped,cv.ROTATE_90_CLOCKWISE)
 
             cv.imwrite("C:/new_folder/resultado"+str(i)+".jpg", warped)            
             i+=1
-
-
-copy = cv.drawContours(copy, four_points_list, -1, (0,0,255),1)
-
-
-cv.imwrite("C:/new_folder/resultado.jpg", copy)
